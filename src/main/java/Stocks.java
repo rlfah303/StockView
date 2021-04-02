@@ -1,6 +1,3 @@
-import java.io.IOException;
-import java.awt.*;
-import java.io.*;
 import java.util.ArrayList;
 
 
@@ -37,6 +34,7 @@ public class Stocks {
         height =x;
 
     }
+
 
 
     public double getStockRate() {

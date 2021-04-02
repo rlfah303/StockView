@@ -3,9 +3,9 @@ import java.util.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import javax.swing.JFrame;
 
 //yahoo stock api https://financequotes-api.com/
 import yahoofinance.Stock;
@@ -14,15 +14,18 @@ import java.math.BigDecimal;
 
 
 
-public class Main extends JFrame{
+public class Main extends JFrame implements KeyListener{
 
     private Vis mainPanel;
-    String stockInput;
     private ArrayList<ArrayList<Stocks>>stocks;
     private  ArrayList<Stocks> first;
     private  ArrayList<Stocks> second;
     private  ArrayList<Stocks> third;
-    private boolean timer;
+    String stockInput;
+
+    List<Stocks> toRemove = new ArrayList<Stocks>();
+
+
 
 
 
@@ -30,6 +33,9 @@ public class Main extends JFrame{
 
         JMenuBar mb = setupMenu();
         setJMenuBar(mb);
+        addKeyListener(this);
+
+
 
         mainPanel = new Vis();
         setContentPane(mainPanel);
@@ -43,17 +49,6 @@ public class Main extends JFrame{
         setTitle("Put the title of your program here");
         setVisible(true);
 
-
-        //ex
-//        aaaa = new Stocks("AAAA", 10.68, 23.23,0,0,0,0);
-//        bbbb = new Stocks("BBBB", 1.33, 400.53,0,0,0,0);
-//        cccc = new Stocks("CCCC", -70.23, 2.48,0,0,0,0);
-//        dddd = new Stocks("DDDD", -5.95, 1200.12,0,0,0,0);
-//        ffff = new Stocks("FFFF", -30.20, 650.99,0,0,0,0);
-//        gggg = new Stocks("GGGG", 90.23, 41.39,0,0,0,0);
-//        hhhh = new Stocks("HHHH", 40.66, 2068.63,0,0,0,0);
-//        jjjj = new Stocks("JJJJ", -27.88, 1.66,0,0,0,0);
-//        kkkk = new Stocks("KKKK", 35.88, 5.26,0,0,0,0);
 
         //add arraylist
         stocks.add(first);
@@ -72,7 +67,7 @@ public class Main extends JFrame{
 
         JMenuItem item1 = new JMenuItem("Choose Stock");
         JMenuItem item2 = new JMenuItem("Reset");
-        JMenuItem item3 = new JMenuItem("F5");
+        JMenuItem item3 = new JMenuItem("Remove");
 
 
 
@@ -86,18 +81,6 @@ public class Main extends JFrame{
             }
             mainPanel.setStockArray(stocks);
             repaint();
-//            final JFileChooser fc = new JFileChooser(FileSystemView.getFileSystemView());
-//            fc.setDialogTitle("Choose a folder");
-//            fc.setCurrentDirectory(new File(System.getProperty("user.home")));
-//            fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-//            int fcValue = fc.showOpenDialog(getParent());
-//            if(fcValue == JFileChooser.APPROVE_OPTION){
-//                filepath = fc.getSelectedFile().getPath();
-//                mainPanel.setPath(filepath);
-//                ff = new File(filepath);
-//                nodePanel= new Node(ff,"none");
-//                mainPanel.setRoot(nodePanel);
-//            }
 
         });
         item2.addActionListener(e -> {
@@ -107,15 +90,15 @@ public class Main extends JFrame{
 
         });
         item3.addActionListener(e -> {
+            stockInput = JOptionPane.showInputDialog("Which one to remove?");
             try {
-                resetStockPercent(stocks);
+                removeStock(stockInput);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
-            mainPanel.setStockArray(stocks);
-            System.out.println("got new array");
-            mainPanel.update(mainPanel.getGraphics());
 
+            mainPanel.setStockArray(stocks);
+            repaint();
 
 
         });
@@ -133,7 +116,6 @@ public class Main extends JFrame{
     public void getStockInfo(String stockName) throws IOException {
         Stock stock = YahooFinance.get(stockName);
         BigDecimal p = stock.getQuote().getPrice();
-        System.out.println("p asdasdasdasdas"+p);
         BigDecimal c= stock.getQuote().getChangeInPercent();
         double price = Double.parseDouble((p.toString()));
         double change = Double.parseDouble((c.toString()));
@@ -149,15 +131,25 @@ public class Main extends JFrame{
         }
 
     }
+    public void removeStock(String stockName) throws IOException {
+        for (int i= 0; i<3;i++){
+            for (var v: stocks.get(i)){
+                if (v.getStockName().equals(stockName)){
+                    toRemove.add(v);
+                }
+            }
+        }
+        for (int i= 0; i<3;i++){
+            stocks.get(i).removeAll(toRemove);
+        }
+    }
     public void resetStockPercent(ArrayList<ArrayList<Stocks>> arr) throws IOException {
-        System.out.println("getting reset");
         for (int i= 0; i<3;i++){
             for (var v: arr.get(i)){
                 Stock stock = YahooFinance.get(v.getStockName());
                 BigDecimal c= stock.getQuote().getChangeInPercent();
                 double change = Double.parseDouble((c.toString()));
                 v.setStockRate(change);
-
 
             }
         }
@@ -169,20 +161,17 @@ public class Main extends JFrame{
         stocks.get(1).clear();
         stocks.get(2).clear();
     }
-    public void setTimer(int t){
+    public void refreshPage(){
         try {
-            Thread.sleep(t);
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            resetStockPercent(stocks);
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
         }
+        mainPanel.setStockArray(stocks);
+        mainPanel.update(mainPanel.getGraphics());
 
     }
-    public void setLive(){
-        timer =false;
-        System.out.println("setlive******************************");
 
-    }
 
     public static void main (String[]args){
 
@@ -195,6 +184,25 @@ public class Main extends JFrame{
                 }
             }
         });
+    }
+
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        refreshPage();
+        System.out.println("keyPressed");
+        mainPanel.setGetOneStock(false);
+        repaint();
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }
 

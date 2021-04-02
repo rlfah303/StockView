@@ -113,6 +113,11 @@ public class Main extends JFrame implements KeyListener{
 
     }
 
+    /**
+     * get stock info from API
+     * @param stockName
+     * @throws IOException
+     */
     public void getStockInfo(String stockName) throws IOException {
         Stock stock = YahooFinance.get(stockName);
         BigDecimal p = stock.getQuote().getPrice();
@@ -131,6 +136,12 @@ public class Main extends JFrame implements KeyListener{
         }
 
     }
+
+    /**
+     * remove one stock
+     * @param stockName
+     * @throws IOException
+     */
     public void removeStock(String stockName) throws IOException {
         for (int i= 0; i<3;i++){
             for (var v: stocks.get(i)){
@@ -143,6 +154,12 @@ public class Main extends JFrame implements KeyListener{
             stocks.get(i).removeAll(toRemove);
         }
     }
+
+    /**
+     * reset stock percent
+     * @param arr
+     * @throws IOException
+     */
     public void resetStockPercent(ArrayList<ArrayList<Stocks>> arr) throws IOException {
         for (int i= 0; i<3;i++){
             for (var v: arr.get(i)){
@@ -156,11 +173,19 @@ public class Main extends JFrame implements KeyListener{
 
 
     }
+
+    /**
+     * reset stock array
+     */
     public void resetStock(){
         stocks.get(0).clear();
         stocks.get(1).clear();
         stocks.get(2).clear();
     }
+
+    /**
+     * refreshing page
+     */
     public void refreshPage(){
         try {
             resetStockPercent(stocks);

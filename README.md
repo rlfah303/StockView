@@ -1,4 +1,4 @@
-<img width="1393" alt="0" src="https://user-images.githubusercontent.com/59432666/114645586-756b3900-9c75-11eb-8f58-152e7a13de98.png">
+![00](https://user-images.githubusercontent.com/59432666/114690184-2b547880-9cb2-11eb-9bf0-a107ab185c53.jpg)
 
 
 # <p align="center">Stock View</p>
@@ -39,8 +39,17 @@ Software Engineer<br/>
 - 자세히 보기 기능
 
 1. 원하는 주식을 추가 할 수 있다.
+![11](https://user-images.githubusercontent.com/59432666/114690275-3dceb200-9cb2-11eb-9c54-42dcba29e618.jpg)
+
 2. 원하는 주식을 목록에서 삭제 할 수 있다
+![22](https://user-images.githubusercontent.com/59432666/114690288-40310c00-9cb2-11eb-9dc2-415eb792e796.jpg)
+
 3. ENTER를 누르면 market hours때 실시간 업데이트가 가능하다
+![33](https://user-images.githubusercontent.com/59432666/114690303-42936600-9cb2-11eb-88cf-d33e43c76861.jpg)
+
 4. 모든 정보를 지우고 다시 시작하기 가능
+![44](https://user-images.githubusercontent.com/59432666/114690340-4b843780-9cb2-11eb-91f3-881c6a1cc825.jpg)
+
 5. 해당하는 주식을선택하면 정보를 자세히 볼 수있다.
+![55](https://user-images.githubusercontent.com/59432666/114690364-5212af00-9cb2-11eb-9424-542c85d62514.jpg)
 

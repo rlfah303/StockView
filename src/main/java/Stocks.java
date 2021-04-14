@@ -17,7 +17,6 @@ public class Stocks {
     private double left;
     private double width;
     private double height;
-    private ArrayList<Stocks> stocks;
 
 
     public Stocks(){

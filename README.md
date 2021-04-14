@@ -3,7 +3,8 @@
 
 # <p align="center">Stock View</p>
 
-<p> 
+<p>
+
 </p>
 <br/>
 
@@ -24,6 +25,7 @@ Software Engineer<br/>
 <br/>
 
 ## :foggy: Background
+
 
 <br/>
 

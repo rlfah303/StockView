@@ -38,7 +38,8 @@ Software Engineer<br/>
 - 리셋 기능
 - 자세히 보기 기능
 
-<p align="center">1.원하는 주식을 추가 할 수 있다.</p>
+<div align="center> 1.원하는 주식을 추가 할 수 있다.</div>
+            
 ![11](https://user-images.githubusercontent.com/59432666/114690275-3dceb200-9cb2-11eb-9c54-42dcba29e618.jpg)
 
 2. 원하는 주식을 목록에서 삭제 할 수 있다

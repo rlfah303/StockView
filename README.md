@@ -57,9 +57,18 @@ Software Engineer<br/>
 
 ## :computer:Code
 - Yahoo Finace API
-```javascript 
-function test() { 
- console.log("hello world!"); 
+```java 
+//yahoo stock api https://financequotes-api.com/
+import yahoofinance.Stock;
+import yahoofinance.YahooFinance;
+import java.math.BigDecimal;
+
+public void getStockInfo(String stockName) throws IOException {
+      Stock stock = YahooFinance.get(stockName);
+      BigDecimal p = stock.getQuote().getPrice();
+      BigDecimal c= stock.getQuote().getChangeInPercent();
+      double price = Double.parseDouble((p.toString()));
+      double change = Double.parseDouble((c.toString()));
 } 
 ```
 

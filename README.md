@@ -55,6 +55,8 @@ Software Engineer<br/>
 ![55](https://user-images.githubusercontent.com/59432666/114690364-5212af00-9cb2-11eb-9424-542c85d62514.jpg)
 
 
+## :computer:Code
+
 ## :sparkler: Future Work
 
 - 저장기능: 저장 기능을 추가하여 사용자가 프로그램을 꺼도 저장되도록 한다

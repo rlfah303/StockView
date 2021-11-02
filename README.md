@@ -56,6 +56,12 @@ Software Engineer<br/>
 
 
 ## :computer:Code
+- Yahoo Finace API
+```javascript 
+function test() { 
+ console.log("hello world!"); 
+} 
+```
 
 ## :sparkler: Future Work
 
